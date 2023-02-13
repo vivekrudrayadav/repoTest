@@ -9,7 +9,7 @@ import com.aventstack.extentreports.markuputils.MarkupHelper;
 
 
 public class TestScript {
-	//static WebWebUtil WebUtil;
+	static WebUtil WebUtil;
 	public static   void main(String[] args) {
 		//WebUtil=new WebWebUtil();
 		//validateUserNameLocation("userNameLocation","TC001","user_name","name","userName");

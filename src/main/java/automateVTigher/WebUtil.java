@@ -33,10 +33,10 @@ import com.aventstack.extentreports.markuputils.MarkupHelper;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 
 public class WebUtil {
-	public static WebDriver driver;
-	public static ExtentReports eReport;
-	public static ExtentTest logger;
-	public static JavascriptExecutor js = (JavascriptExecutor) driver;
+	public  WebDriver driver;
+	public  ExtentReports eReport;
+	public  ExtentTest logger;
+	public  JavascriptExecutor js = (JavascriptExecutor) driver;
 
 //	public  void main(String[] args) {
 //		System.out.println(timestamp());
@@ -62,7 +62,7 @@ public class WebUtil {
 	 * 
 	 * @param rowNomberw :row which want to delete
 	 */
-	public static void deleteDataFromTable(int rowNomberw) {
+	public  void deleteDataFromTable(int rowNomberw) {
 		try {
 			WebElement element = searchElement("//tr[@id='row_" + rowNomberw + "']//a[text()='del']", "xpath");
 			clickOnElement(element, "delete");
@@ -83,7 +83,7 @@ public class WebUtil {
 	 * 
 	 * @param rowNomberw :row which want to delete
 	 */
-	public static void editDataOfTable(int rowNomberw) {
+	public  void editDataOfTable(int rowNomberw) {
 		try {
 			WebElement element = searchElement("//tr[@id='row_" + rowNomberw + "']//a[text()='edit']", "xpath");
 			clickOnElement(element, "edit");
@@ -106,7 +106,7 @@ public class WebUtil {
 	 * 
 	 * @param rowNomberw row number whose data want to get
 	 */
-	public static void TableData(int rowNomberw) {
+	public  void TableData(int rowNomberw) {
 		try {
 			List<WebElement> elements = searchElements("//tr[@id='row_" + rowNomberw + "']//a[text()='edit']", "xpath");
 			for (WebElement Element : elements) {
@@ -123,7 +123,7 @@ public class WebUtil {
 	 * 
 	 * @return it return the time in form of String
 	 */
-	public static String timestamp() {
+	public  String timestamp() {
 		SimpleDateFormat date = new SimpleDateFormat("dd MMM yyyy HH:mm:ss z	");
 		String timeStamp = date.format(new Date());
 		return timeStamp;
@@ -134,7 +134,7 @@ public class WebUtil {
 	 * 
 	 * @param reportNam name of the report take as the parameter
 	 */
-	public static void reportGenerate(String reportNam) {
+	public  void reportGenerate(String reportNam) {
 		ExtentSparkReporter spark = new ExtentSparkReporter("automation\\" + reportNam + ".html");
 		eReport = new ExtentReports();
 		eReport.attachReporter(spark);
@@ -146,12 +146,12 @@ public class WebUtil {
 	 * 
 	 * @param TCName take test case name as the parameter
 	 */
-	public static void initLogger(String TCName) {
+	public  void initLogger(String TCName) {
 		logger = eReport.createTest(TCName);
 
 	}
 
-	public static void flushReport() {
+	public  void flushReport() {
 		eReport.flush();
 	}
 
@@ -160,7 +160,7 @@ public class WebUtil {
 	 * 
 	 * @param browserName take browser name as the parameter
 	 */
-	public static void browserLaunch(String browserName) {
+	public  void browserLaunch(String browserName) {
 		try {
 			if (browserName.equalsIgnoreCase("chrome")) {
 				System.setProperty("WebDriver.chrome.driver",
@@ -189,7 +189,7 @@ public class WebUtil {
 	 * 
 	 * @param url take url as the parameter
 	 */
-	public static void openUrl(String url) {
+	public  void openUrl(String url) {
 		try {
 			driver.get(url);
 			logger.log(Status.INFO, url + " hit successfully.");
@@ -206,7 +206,7 @@ public class WebUtil {
 	 * @param locatorName
 	 * @return it retun the WebElement as it found the element on WebPage
 	 */
-	public static  WebElement searchElement(String locatorValue, String locatorName) {
+	public   WebElement searchElement(String locatorValue, String locatorName) {
 		WebElement we = null;
 		try {
 			if (locatorName.equalsIgnoreCase("xpath")) {
@@ -248,7 +248,7 @@ public class WebUtil {
 	 * @param locatorName
 	 * @return it retun the list of WebElement as it found the element on WebPage
 	 */
-	public static List<WebElement> searchElements(String locatorValue, String locatorName) {
+	public  List<WebElement> searchElements(String locatorValue, String locatorName) {
 		List<WebElement> we = null;
 		try {
 			if (locatorName.equalsIgnoreCase("xpath")) {
@@ -290,7 +290,7 @@ public class WebUtil {
 	 * @param element
 	 * @return it return true if Webelement is dispaly and enabled on WebPage
 	 */
-	public static boolean elementStatus(WebElement element) {
+	public  boolean elementStatus(WebElement element) {
 		boolean status = false;
 		try {
 			if (element.isDisplayed() == true) {
@@ -315,7 +315,7 @@ public class WebUtil {
 	 * 
 	 * @param time how long it will wait
 	 */
-	public static void setImplicitWait(int timeInSecond) {
+	public  void setImplicitWait(int timeInSecond) {
 		try {
 			timeInSecond = 1000 * timeInSecond;
 			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(timeInSecond));
@@ -333,7 +333,7 @@ public class WebUtil {
 	 * @param value       value which have to be entered in the element
 	 * @param elementName name of element in which value will entered
 	 */
-	public static void enterValue(WebElement element, String value, String elementName) {
+	public  void enterValue(WebElement element, String value, String elementName) {
 		try {
 			if (elementStatus(element) == true) {
 				element.clear();
@@ -362,7 +362,7 @@ public class WebUtil {
 	 * @param element whose size it will get
 	 * @return it return the dimension of the element
 	 */
-	public static Dimension elementSize(WebElement element) {
+	public  Dimension elementSize(WebElement element) {
 		Dimension measurement = element.getSize();
 		return measurement;
 	}
@@ -373,7 +373,7 @@ public class WebUtil {
 	 * @param element     whome it will click
 	 * @param elementName element name on which click will perform
 	 */
-	public  static void clickOnElement(WebElement element, String elementName) {
+	public   void clickOnElement(WebElement element, String elementName) {
 		try {
 			if (elementStatus(element) == true) {
 				element.click();
@@ -399,7 +399,7 @@ public class WebUtil {
 	 * @param attributeName attribute name whose value have to be fetch
 	 * @return it return the value of the attribute as String
 	 */
-	public static String fetchAttributevalue(WebElement element, String attributeName) {
+	public  String fetchAttributevalue(WebElement element, String attributeName) {
 		String text = null;
 		try {
 			text = element.getAttribute(attributeName);
@@ -417,7 +417,7 @@ public class WebUtil {
 	 * @param element it take webElement as paremeter whose inner text will be taken
 	 * @return it return the inner text as String
 	 */
-	public static String fetchInnere(WebElement element) {
+	public  String fetchInnere(WebElement element) {
 		String text = null;
 		try {
 			text = element.getText();
@@ -438,7 +438,7 @@ public class WebUtil {
 	 * @param elementName name of the element on which it will perform
 	 * @return
 	 */
-	public static boolean getCheckBoxStatus(WebElement element, String elementName) {
+	public  boolean getCheckBoxStatus(WebElement element, String elementName) {
 		boolean status = false;
 		try {
 			status = element.isSelected();
@@ -459,7 +459,7 @@ public class WebUtil {
 	 * 
 	 * @return it return the title of the page as String
 	 */
-	public static String takePageTitle() {
+	public  String takePageTitle() {
 		String text = null;
 		try {
 			text = driver.getTitle();
@@ -478,7 +478,7 @@ public class WebUtil {
 	 * 
 	 * @return it will return the current url as the String
 	 */
-	public static String takeCurrentUrl() {
+	public  String takeCurrentUrl() {
 		String text = null;
 		try {
 			text = driver.getCurrentUrl();
@@ -495,7 +495,7 @@ public class WebUtil {
 	 * this method is used to close the window on which it is active
 	 * 
 	 */
-	public static void closeWindow() {
+	public  void closeWindow() {
 		try {
 			driver.close();
 			logger.log(Status.INFO, "current working window has been closed successfully");
@@ -512,7 +512,7 @@ public class WebUtil {
 	 * @param element     drop down in which its option have to be select
 	 * @param visibleText text through which the option is select
 	 */
-	public static void chooseByVisibleText(WebElement element, String visibleText) {
+	public  void chooseByVisibleText(WebElement element, String visibleText) {
 		try {
 			new Select(element).selectByVisibleText(visibleText);
 			logger.log(Status.INFO, visibleText + " has been selected from the dropdown");
@@ -530,7 +530,7 @@ public class WebUtil {
 	 * @param value   value of the value attribute through which the option is
 	 *                select
 	 */
-	public static void chooseByValue(WebElement element, String value) {
+	public  void chooseByValue(WebElement element, String value) {
 		try {
 			new Select(element).selectByValue(value);
 			logger.log(Status.INFO, value + " has been selected from the dropdown");
@@ -546,7 +546,7 @@ public class WebUtil {
 	 * @param element drop down in which its option have to be select
 	 * @param index   value of the option which have to be select
 	 */
-	public static void chooseByIndex(WebElement element, int index) {
+	public  void chooseByIndex(WebElement element, int index) {
 		try {
 			new Select(element).selectByIndex(index);
 			logger.log(Status.INFO, " Option having index number " + index + " has been selected from the dropdown");
@@ -563,7 +563,7 @@ public class WebUtil {
 	 * @param element this take webElement of the drop down as the parameter
 	 * @return it return the list of WebElement which are selected in the drop down
 	 */
-	public static List<WebElement> takeAllSelectedOption(WebElement element) {
+	public  List<WebElement> takeAllSelectedOption(WebElement element) {
 		List<WebElement> selectedOptions = null;
 		try {
 			selectedOptions = new Select(element).getAllSelectedOptions();
@@ -581,7 +581,7 @@ public class WebUtil {
 	 * @param element this take webElement of the drop down as the parameter
 	 * @return it return the list of the WebElement which are in the drop down
 	 */
-	public static List<WebElement> takeAllOption(WebElement element) {
+	public  List<WebElement> takeAllOption(WebElement element) {
 		List<WebElement> selectedOptions = null;
 		try {
 			selectedOptions = new Select(element).getOptions();
@@ -597,7 +597,7 @@ public class WebUtil {
 	 * @param element
 	 * @return
 	 */
-	public static WebElement takeFirstSelectedOptionDropDown(WebElement element) {
+	public  WebElement takeFirstSelectedOptionDropDown(WebElement element) {
 		WebElement selectedOptions = null;
 		try {
 			selectedOptions = new Select(element).getFirstSelectedOption();
@@ -609,7 +609,7 @@ public class WebUtil {
 		return selectedOptions;
 	}
 
-	public static boolean isMultipleOption(WebElement element) {
+	public  boolean isMultipleOption(WebElement element) {
 		boolean status = false;
 		try {
 			new Select(element).isMultiple();
@@ -622,7 +622,7 @@ public class WebUtil {
 		return status;
 	}
 
-	public static void switchToFrame(int index) {
+	public  void switchToFrame(int index) {
 		try {
 			driver.switchTo().frame(index);
 			logger.log(Status.INFO, "driver switch to the frame having the index number " + index);
@@ -632,7 +632,7 @@ public class WebUtil {
 		}
 	}
 
-	public static void switchToFrame(String valueOrId) {
+	public  void switchToFrame(String valueOrId) {
 		try {
 			driver.switchTo().frame(valueOrId);
 			logger.log(Status.INFO, "driver switch to the frame having the attribute value  = " + valueOrId);
@@ -642,7 +642,7 @@ public class WebUtil {
 		}
 	}
 
-	public static void switchToFrame(WebElement element, String elementName) {
+	public  void switchToFrame(WebElement element, String elementName) {
 		try {
 			driver.switchTo().frame(element);
 			logger.log(Status.INFO, "driver switch to the " + elementName + "frame ");
@@ -652,7 +652,7 @@ public class WebUtil {
 		}
 	}
 
-	public static void switchToParentFrame() {
+	public  void switchToParentFrame() {
 		try {
 			driver.switchTo().parentFrame();
 			logger.log(Status.INFO, "driver is switch to the parent frame ");
@@ -662,7 +662,7 @@ public class WebUtil {
 		}
 	}
 
-	public static void switchToMainFrame() {
+	public  void switchToMainFrame() {
 		try {
 			driver.switchTo().defaultContent();
 			logger.log(Status.INFO, "driver is switch to the main frame ");
@@ -672,7 +672,7 @@ public class WebUtil {
 		}
 	}
 
-	public static void acceptAlert() {
+	public  void acceptAlert() {
 		try {
 			driver.switchTo().alert().accept();
 			logger.log(Status.INFO, "Alert has been accepted");
@@ -682,7 +682,7 @@ public class WebUtil {
 		}
 	}
 
-	public static void dismissAlert() {
+	public  void dismissAlert() {
 		try {
 			driver.switchTo().alert().dismiss();
 			logger.log(Status.INFO, "Alert has been dismissed");
@@ -692,7 +692,7 @@ public class WebUtil {
 		}
 	}
 
-	public static String alertMessage() {
+	public  String alertMessage() {
 		String message = null;
 		try {
 			message = driver.switchTo().alert().getText();
@@ -704,7 +704,7 @@ public class WebUtil {
 		return message;
 	}
 
-	public static void alertMessage(String text) {
+	public  void alertMessage(String text) {
 
 		try {
 			driver.switchTo().alert().sendKeys(text);
@@ -716,7 +716,7 @@ public class WebUtil {
 
 	}
 
-	public static void clickByAction(WebElement element, String elementName) {
+	public  void clickByAction(WebElement element, String elementName) {
 		try {
 			new Actions(driver).click(element).build().perform();
 			logger.log(Status.INFO, elementName + " is click successfully");
@@ -726,7 +726,7 @@ public class WebUtil {
 		}
 	}
 
-	public static void enterValueByAction(WebElement element, String value, String elementName) {
+	public  void enterValueByAction(WebElement element, String value, String elementName) {
 		try {
 			new Actions(driver).sendKeys(element, value).build().perform();
 			logger.log(Status.INFO, value + " is send  successfully");
@@ -736,7 +736,7 @@ public class WebUtil {
 		}
 	}
 
-	public static void goToElementAction(WebElement element) {
+	public  void goToElementAction(WebElement element) {
 		try {
 			new Actions(driver).moveToElement(element).build().perform();
 		} catch (Exception e) {
@@ -744,7 +744,7 @@ public class WebUtil {
 		}
 	}
 
-	public static void ClickByActionAction() {
+	public  void ClickByActionAction() {
 
 		try {
 			new Actions(driver).click().build().perform();
@@ -753,7 +753,7 @@ public class WebUtil {
 		}
 	}
 
-	public static void ClicAndHoldAction() {
+	public  void ClicAndHoldAction() {
 
 		try {
 			new Actions(driver).clickAndHold().build().perform();
@@ -762,7 +762,7 @@ public class WebUtil {
 		}
 	}
 
-	public static void doubleClickAction(WebElement element) {
+	public  void doubleClickAction(WebElement element) {
 
 		try {
 			new Actions(driver).clickAndHold(element).build().perform();
@@ -771,7 +771,7 @@ public class WebUtil {
 		}
 	}
 
-	public static void doubleClickAction() {
+	public  void doubleClickAction() {
 
 		try {
 			new Actions(driver).clickAndHold().build().perform();
@@ -780,7 +780,7 @@ public class WebUtil {
 		}
 	}
 
-	public static void validateText(WebElement element, String expectedText) {
+	public  void validateText(WebElement element, String expectedText) {
 		try {
 			String actualText = fetchInnere(element);
 
@@ -804,7 +804,7 @@ public class WebUtil {
 
 	}
 
-	public static void validateAttributeValue(WebElement element, String expectedValue, String value) {
+	public  void validateAttributeValue(WebElement element, String expectedValue, String value) {
 		try {
 			String actualValue = fetchAttributevalue(element, value);
 
@@ -826,7 +826,7 @@ public class WebUtil {
 
 	}
 
-	public static void validateEnabled(WebElement element, String elementName) {
+	public  void validateEnabled(WebElement element, String elementName) {
 		try {
 			boolean status = false;
 			status = element.isEnabled();
@@ -844,7 +844,7 @@ public class WebUtil {
 		}
 	}
 
-	public static void validateDisabled(WebElement element, String elementName) {
+	public  void validateDisabled(WebElement element, String elementName) {
 		try {
 
 			boolean status = false;
@@ -862,7 +862,7 @@ public class WebUtil {
 		}
 	}
 
-	public static void validateDisplay(WebElement element, String elementName) {
+	public  void validateDisplay(WebElement element, String elementName) {
 		try {
 
 			boolean status = false;
@@ -882,7 +882,7 @@ public class WebUtil {
 		}
 	}
 
-	public static void validateHide(WebElement element, String elementName) {
+	public  void validateHide(WebElement element, String elementName) {
 		try {
 
 			boolean status = false;
@@ -902,7 +902,7 @@ public class WebUtil {
 		}
 	}
 
-	public static Dimension getElementSize(WebElement element) {
+	public  Dimension getElementSize(WebElement element) {
 		Dimension measurement = null;
 		try {
 
@@ -914,7 +914,7 @@ public class WebUtil {
 		return measurement;
 	}
 
-	public static Point getElementLocation(WebElement element) {
+	public  Point getElementLocation(WebElement element) {
 		Point measurement = null;
 		try {
 
@@ -926,7 +926,7 @@ public class WebUtil {
 		return measurement;
 	}
 
-	public static Point getElemenetLocation(WebElement element) {
+	public  Point getElemenetLocation(WebElement element) {
 		Point location = null;
 		try {
 			location = element.getLocation();
@@ -937,7 +937,7 @@ public class WebUtil {
 		return location;
 	}
 
-	public static void validateLocation(WebElement element, int expected_x, int expected_y, String elementName) {
+	public  void validateLocation(WebElement element, int expected_x, int expected_y, String elementName) {
 		try {
 			Point p = getElemenetLocation(element);
 			int actual_X = p.getX();
@@ -956,7 +956,7 @@ public class WebUtil {
 
 	}
 
-	public static Dimension getElemenetSize(WebElement element) {
+	public  Dimension getElemenetSize(WebElement element) {
 		Dimension location = null;
 		try {
 			location = element.getSize();
@@ -967,7 +967,7 @@ public class WebUtil {
 		return location;
 	}
 
-	public static void validateSize(WebElement element, int expectedWidth, int expectedHeight, String elementName) {
+	public  void validateSize(WebElement element, int expectedWidth, int expectedHeight, String elementName) {
 		try {
 			Point p = getElemenetLocation(element);
 			int actual_width = p.getX();
@@ -987,7 +987,7 @@ public class WebUtil {
 
 	}
 
-	public static int colorOfElement(WebElement element, String text_backgroundColor) {
+	public  int colorOfElement(WebElement element, String text_backgroundColor) {
 		int colorCode = 0;
 		try {
 			String rgbaOfElement = element.getCssValue(text_backgroundColor);
@@ -999,7 +999,7 @@ public class WebUtil {
 
 	}
 
-	public static String takePageSourse() {
+	public  String takePageSourse() {
 		String pageSourse = null;
 		try {
 			pageSourse = driver.getPageSource();
@@ -1011,7 +1011,7 @@ public class WebUtil {
 		return pageSourse;
 	}
 
-	public static String takeWindowHandle() {
+	public  String takeWindowHandle() {
 		String windowHandle = null;
 		try {
 			windowHandle = driver.getWindowHandle();
@@ -1022,7 +1022,7 @@ public class WebUtil {
 		return windowHandle;
 	}
 
-	public static Set<String> takeWindowHandles() {
+	public  Set<String> takeWindowHandles() {
 		Set<String> windowHandles = null;
 		try {
 			windowHandles = driver.getWindowHandles();
@@ -1033,7 +1033,7 @@ public class WebUtil {
 		return windowHandles;
 	}
 
-	public static void handleMultipleWindow(String titleOrUrl, String titleOrUrlValue) {
+	public  void handleMultipleWindow(String titleOrUrl, String titleOrUrlValue) {
 		try {
 			Set<String> windowHandles = takeWindowHandles();
 			if (titleOrUrl.equalsIgnoreCase("title")) {
@@ -1056,7 +1056,7 @@ public class WebUtil {
 		}
 	}
 
-	public static void closeAllWindowExceptOne(String titleOrUrl, String titleOrUrlValue) {
+	public  void closeAllWindowExceptOne(String titleOrUrl, String titleOrUrlValue) {
 		try {
 			Set<String> windowHandles = takeWindowHandles();
 			if (titleOrUrl.equalsIgnoreCase("title")) {
@@ -1086,7 +1086,7 @@ public class WebUtil {
 	 * @param value       tha value which have to be enter in the webelement
 	 * @param elementName name of the element on which the value hgave to be enter
 	 */
-	public static void jsEnterValue(WebElement element, String value, String elementName) {
+	public  void jsEnterValue(WebElement element, String value, String elementName) {
 		try {
 			js.executeScript("arguments[0].value='" + value + "'", element);
 			logger.log(Status.INFO, elementName + " has been click  successfully");
@@ -1108,7 +1108,7 @@ public class WebUtil {
 	 * 
 	 * @return it retun the title of the page as the string
 	 */
-	public static String jsTakePageTitle() {
+	public  String jsTakePageTitle() {
 		String title = null;
 		try {
 			title = (String) js.executeScript("return document.title");
@@ -1131,7 +1131,7 @@ public class WebUtil {
 	 *                    will perform
 	 * @param elementName name of the element on which the click will perform
 	 */
-	public static void jsClick(WebElement element, String elementName) {
+	public  void jsClick(WebElement element, String elementName) {
 		try {
 			js.executeAsyncScript("arguments[0].click;", element);
 			logger.log(Status.INFO, elementName + "   has been click successfully");
@@ -1142,7 +1142,7 @@ public class WebUtil {
 		}
 	}
 
-	public static void jsScrollByAmount(int horizontal, int vertical) {
+	public  void jsScrollByAmount(int horizontal, int vertical) {
 		try {
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			js.executeScript("window.scrollBy(" + horizontal + "," + vertical + ")");
@@ -1153,7 +1153,7 @@ public class WebUtil {
 		}
 	}
 
-	public static void jsScrollByView(int horizontal, int vertical) {
+	public  void jsScrollByView(int horizontal, int vertical) {
 		try {
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			js.executeScript("window.scrollBy(" + horizontal + "," + vertical + ")");
